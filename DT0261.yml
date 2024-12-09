@@ -1,24 +1,25 @@
-id: DT0261
-name: Clearing Windows Logs with Wevtutil
-description: Detects attempts to clear Windows event logs using wevtutil
-tactic: defense-evasion
-technique:
-  attack_id: T1070.001
-  name: Clear Windows Event Logs
-platforms:
-  windows:
-    cmd:
-      command: |
-        wevtutil.exe cl System
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: elevated
-      detection:
-        - process_name: wevtutil.exe
-        - command_contains:
-            - wevtutil
-            - cl 
+---
+- id: DT0261
+  name: Clearing Windows Logs with Wevtutil
+  description: Detects attempts to clear Windows event logs using wevtutil
+  tactic: defense-evasion
+  technique:
+    attack_id: T1070.001
+    name: Clear Windows Event Logs
+  platforms:
+    windows:
+      cmd:
+        command: |
+          wevtutil.exe cl System
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: elevated
+  detection:
+    - process_name: wevtutil.exe
+    - command_contains:
+        - wevtutil
+        - cl
