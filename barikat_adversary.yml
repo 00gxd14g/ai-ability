@@ -1,0 +1,86 @@
+id: 36053cb9-a393-4d26-be5d-695df164e466
+name: BARIKAT 2.0
+description: Adversary used for BARIKAT
+objective: 495a9828-cab1-44dd-a0ca-66e38177d8cc
+
+# Atomic ordering follows typical attack sequence:
+# 1. Discovery/Reconnaissance
+# 2. Initial Access & Execution
+# 3. Privilege Escalation & Defense Evasion
+# 4. Credential Access
+# 5. Lateral Movement
+# 6. Impact
+
+atomic_ordering:
+  # Initial Discovery Phase
+  - DT0323  # Whoami basic discovery
+  - DT0267  # User groups enumeration
+  - DT0266  # Net user enumeration
+  - DT0268  # SID reconnaissance
+  - DT0269  # Administrator account enumeration
+  - DT0270  # Administrator group enumeration
+  - DT0339  # Additional administrator enumeration
+  - DT0317  # System info discovery
+  - DT0318  # Process enumeration via tasklist
+  - DT0320  # Process discovery via qprocess
+  
+  # Network Discovery Phase
+  - DT0331  # ARP table recon
+  - DT0273  # Network enumeration via ARP
+  - DT0271  # Route command reconnaissance
+  - DT0319  # Netstat enumeration
+  - DT0333  # Network connections discovery
+  - DT0287  # Zenmap execution
+  - DT0277  # Firewall config enumeration
+  - DT0276  # Firewall state enumeration
+  - DT0275  # Network share enumeration
+  
+  # Active Directory Reconnaissance
+  - DT0334  # Automated AD recon
+  - DT0337  # AD user objects enumeration
+  - DT0332  # AD admin enumeration
+  - DT0292  # Domain trust discovery
+  
+  # Defense Evasion Attempts
+  - DT0298  # Conhost path traversal
+  - DT0303  # Suspicious rundll32 activity
+  - DT0289  # File hiding via attrib
+  - DT0285  # CertUtil decode usage
+  - DT0283  # CertUtil download with VerifyCtl
+  - DT0282  # CertUtil download with URLCache
+  - DT0286  # Windows Defender tampering
+  - DT0297  # CleanWipe usage
+  - DT0261  # Windows log clearing
+  
+  # Execution & Persistence
+  - DT0194  # LethalHTA execution
+  - DT0301  # Svchost spawning Office
+  - DT0305  # Malicious macro detection
+  - DT0313  # Web shell detection
+  - DT0315  # Suspicious csrss process
+  
+  # Credential Access
+  - DT0310  # Mimikatz credential dumping
+  - DT0229  # Password spraying
+  - DT0235  # Encrypted password search
+  - DT0280  # Cleartext password search
+  - DT0290  # Hashcat password cracking
+  - DT0288  # ProcDump usage
+  - DT0293  # XORDump usage
+  - DT0291  # LSASS dump via Outflank-Dumpert
+  
+  # Lateral Movement & Command and Control
+  - DT0241  # RDP session hijacking
+  - DT0299  # SSH RDP tunneling
+  - DT0300  # SSH port forwarding
+  - DT0294  # WMIExec usage
+  
+  # Impact & System Modification
+  - DT0278  # Firewall disable via netsh
+  - DT0279  # Firewall disable via advfirewall
+  - DT0262  # Shadow copy deletion
+  
+  # Additional Discovery
+  - DT0338  # Application window discovery
+  - DT0311  # Whoami as SYSTEM user
+  - DT0284  # Certificate extraction 
