@@ -1,25 +1,28 @@
-id: DT0290
-name: Password Cracking With Hashcat
-description: Detects use of hashcat for password cracking attempts
-tactic: credential-access
-technique:
-  attack_id: T1110.002
-  name: Password Cracking
-platforms:
-  windows:
-    cmd:
-      command: |
-        type NUL > hashcat.exe
-        hashcat.exe -m 1000 -a 0 hashes.txt wordlist.txt
-      cleanup: |
-        del hashcat.exe hashes.txt wordlist.txt 2>nul
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - process_name: hashcat.exe
-        - command_contains:
-            - hashcat
-            - -m
+---
+- id: DT0290
+  name: Password Cracking With Hashcat
+  description: Detects use of hashcat for password cracking attempts
+  tactic: credential-access
+  technique:
+    attack_id: T1110.002
+    name: Password Cracking
+  platforms:
+    windows:
+      cmd:
+        command: |
+          type NUL > hashcat.exe
+          hashcat.exe -m 1000 -a 0 hashes.txt wordlist.txt
+        cleanup: |
+          del hashcat.exe hashes.txt wordlist.txt 2>nul
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - process_name: hashcat.exe
+    - command_contains:
+        - hashcat
+        - -m
+        - -a
+        - 1000

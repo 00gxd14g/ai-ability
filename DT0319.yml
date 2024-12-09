@@ -1,29 +1,30 @@
-id: DT0319
-name: Netstat Command Execution - Network Reconnaissance
-description: Detects execution of netstat command for network connection enumeration
-tactic: discovery
-technique:
-  attack_id: T1049
-  name: System Network Connections Discovery
-platforms:
-  windows:
-    cmd:
-      command: |
-        netstat
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - process_name: netstat
-      exclusions:
-        - username:
-            - nessus
-            - SERVICEDESK$
-            - HDI_Sahip
-            - hdi_sahip
-            - Hdi_Sahip
-        - account_name: SERVICEDESK$ 
+---
+- id: DT0319
+  name: Netstat Command Execution - Network Reconnaissance
+  description: Detects execution of netstat command for network connection enumeration
+  tactic: discovery
+  technique:
+    attack_id: T1049
+    name: System Network Connections Discovery
+  platforms:
+    windows:
+      cmd:
+        command: |
+          netstat
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - process_name: netstat
+  exclusions:
+    - username:
+        - nessus
+        - SERVICEDESK$
+        - HDI_Sahip
+        - hdi_sahip
+        - Hdi_Sahip
+    - account_name: SERVICEDESK$ 

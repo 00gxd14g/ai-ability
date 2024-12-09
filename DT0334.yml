@@ -1,24 +1,25 @@
-id: DT0334
-name: Automated AD Recon
-description: Detects automated Active Directory reconnaissance using ADRecon tool
-tactic: discovery
-technique:
-  attack_id: T1087.002
-  name: Domain Account Discovery
-platforms:
-  windows:
-    cmd:
-      command: |
-        # Simulating ADRecon execution
-        powershell.exe -exec bypass -Command "& {Import-Module .\ADRecon.ps1; Invoke-ADRecon}"
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - command_contains:
-            - ADRecon.ps1
-            - ADRecon 
+---
+- id: DT0334
+  name: Automated AD Recon
+  description: Detects automated Active Directory reconnaissance using ADRecon tool
+  tactic: discovery
+  technique:
+    attack_id: T1087.002
+    name: Domain Account Discovery
+  platforms:
+    windows:
+      cmd:
+        command: |
+          # Simulating ADRecon execution
+          powershell.exe -exec bypass -Command "& {Import-Module .\ADRecon.ps1; Invoke-ADRecon}"
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - command_contains:
+        - ADRecon.ps1
+        - ADRecon 

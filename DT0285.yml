@@ -1,25 +1,26 @@
-id: DT0285
-name: CertUtil With Decode Argument
-description: Detects use of certutil.exe with decode argument for potential malicious file decoding
-tactic: defense-evasion
-technique:
-  attack_id: T1140
-  name: Deobfuscate/Decode Files or Information
-platforms:
-  windows:
-    cmd:
-      command: |
-        certutil -decode encoded.txt decoded.txt
-      cleanup: |
-        del encoded.txt 2>nul
-        del decoded.txt 2>nul
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - process_name: certutil.exe
-        - command_contains:
-            - certutil
-            - -decode 
+---
+- id: DT0285
+  name: CertUtil With Decode Argument
+  description: Detects use of certutil.exe with decode argument for potential malicious file decoding
+  tactic: defense-evasion
+  technique:
+    attack_id: T1140
+    name: Deobfuscate/Decode Files or Information
+  platforms:
+    windows:
+      cmd:
+        command: |
+          certutil -decode encoded.txt decoded.txt
+        cleanup: |
+          del encoded.txt 2>nul
+          del decoded.txt 2>nul
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - process_name: certutil.exe
+    - command_contains:
+        - certutil
+        - -decode

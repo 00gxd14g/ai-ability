@@ -1,22 +1,23 @@
-id: DT0287
-name: Zenmap Tool Execution Detection
-description: Detects execution of Zenmap network scanning tool
-tactic: discovery
-technique:
-  attack_id: T1046
-  name: Network Service Discovery
-platforms:
-  windows:
-    cmd:
-      command: |
-        type NUL > zenmap.exe
-        zenmap.exe
-      cleanup: |
-        del zenmap.exe 2>nul
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - process_name: zenmap.exe 
+---
+- id: DT0287
+  name: Zenmap Tool Execution Detection
+  description: Detects execution of Zenmap network scanning tool
+  tactic: discovery
+  technique:
+    attack_id: T1046
+    name: Network Service Discovery
+  platforms:
+    windows:
+      cmd:
+        command: |
+          type NUL > zenmap.exe
+          zenmap.exe
+        cleanup: |
+          del zenmap.exe 2>nul
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - process_name: zenmap.exe 

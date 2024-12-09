@@ -1,25 +1,26 @@
-id: DT0305
-name: Malicious Macro Detection in Word Document
-description: Detects potential malicious macro execution from Office documents
-tactic: execution
-technique:
-  attack_id: T1204.002
-  name: Malicious File
-platforms:
-  windows:
-    cmd:
-      command: |
-        # This is a detection-only ability, no actual command execution
-        echo "Monitoring for suspicious Office macro execution"
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - parent_process:
-            - excel.exe
-            - winword.exe
-        - process_name_list: RefSet: Process Names List for DT0305 Rule 
+---
+- id: DT0305
+  name: Malicious Macro Detection in Word Document
+  description: Detects potential malicious macro execution from Office documents
+  tactic: execution
+  technique:
+    attack_id: T1204.002
+    name: Malicious File
+  platforms:
+    windows:
+      cmd:
+        command: |
+          # This is a detection-only ability, no actual command execution
+          echo "Monitoring for suspicious Office macro execution"
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - parent_process:
+        - excel.exe
+        - winword.exe
+    - process_name_list: RefSet: Process Names List for DT0305 Rule

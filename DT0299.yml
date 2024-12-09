@@ -1,25 +1,26 @@
-id: DT0299
-name: Suspicious SSH Usage - Possible RDP Tunneling
-description: Detects SSH usage potentially indicating RDP tunneling
-tactic: command-and-control
-technique:
-  attack_id: T1572
-  name: Protocol Tunneling
-platforms:
-  windows:
-    cmd:
-      command: |
-        ssh -L 3389:target:3389 user@host
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - process_name: ssh.exe
-        - command_contains:
-            - ssh
-            - -L
-            - 3389 
+---
+- id: DT0299
+  name: Suspicious SSH Usage - Possible RDP Tunneling
+  description: Detects SSH usage potentially indicating RDP tunneling
+  tactic: command-and-control
+  technique:
+    attack_id: T1572
+    name: Protocol Tunneling
+  platforms:
+    windows:
+      cmd:
+        command: |
+          ssh -L 3389:target:3389 user@host
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - process_name: ssh.exe
+    - command_contains:
+        - ssh
+        - -L
+        - 3389

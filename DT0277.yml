@@ -1,25 +1,26 @@
-id: DT0277
-name: Windows Firewall Config Enumeration via Netsh
-description: Detects enumeration of Windows Firewall configuration using netsh command
-tactic: discovery
-technique:
-  attack_id: T1016
-  name: System Network Configuration Discovery
-platforms:
-  windows:
-    cmd:
-      command: |
-        netsh firewall show config
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - command_contains:
-            - netsh
-            - firewall
-            - show
-            - config 
+---
+- id: DT0277
+  name: Windows Firewall Config Enumeration via Netsh
+  description: Detects enumeration of Windows Firewall configuration using netsh command
+  tactic: discovery
+  technique:
+    attack_id: T1016
+    name: System Network Configuration Discovery
+  platforms:
+    windows:
+      cmd:
+        command: |
+          netsh firewall show config
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - command_contains:
+        - netsh
+        - firewall
+        - show
+        - config 

@@ -1,24 +1,25 @@
-id: DT0268
-name: User Enumeration - SID Reconnaissance via WMIC
-description: Detects user SID enumeration using WMIC useraccount command
-tactic: discovery
-technique:
-  attack_id: T1087.001
-  name: Local Account Discovery
-platforms:
-  windows:
-    cmd:
-      command: |
-        wmic useraccount get name,sid
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - process_name: WMIC.exe
-        - command_contains:
-            - wmic
-            - useraccount 
+---
+- id: DT0268
+  name: User Enumeration - SID Reconnaissance via WMIC
+  description: Detects user SID enumeration using WMIC useraccount command
+  tactic: discovery
+  technique:
+    attack_id: T1087.001
+    name: Local Account Discovery
+  platforms:
+    windows:
+      cmd:
+        command: |
+          wmic useraccount get name,sid
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - process_name: WMIC.exe
+    - command_contains:
+        - wmic
+        - useraccount 

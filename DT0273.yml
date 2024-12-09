@@ -1,27 +1,28 @@
-id: DT0273
-name: Network Enumeration - ARP Table Reconnaissance
-description: Detects ARP table enumeration while excluding known benign processes
-tactic: discovery
-technique:
-  attack_id: T1016
-  name: System Network Configuration Discovery
-platforms:
-  windows:
-    cmd:
-      command: |
-        arp -a
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - command_contains:
-            - arp
-            - -a
-      exclusions:
+---
+- id: DT0273
+  name: Network Enumeration - ARP Table Reconnaissance
+  description: Detects ARP table enumeration while excluding known benign processes
+  tactic: discovery
+  technique:
+    attack_id: T1016
+    name: System Network Configuration Discovery
+  platforms:
+    windows:
+      cmd:
+        command: |
+          arp -a
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - command_contains:
+        - arp
+        - -a
+    - exclusions:
         - username:
             - titus
             - nessus

@@ -1,24 +1,25 @@
-id: DT0338
-name: Application Window Discovery
-description: Detects enumeration of application windows using PowerShell
-tactic: discovery
-technique:
-  attack_id: T1010
+---
+- id: DT0338
   name: Application Window Discovery
-platforms:
-  windows:
-    psh:
-      command: |
-        Get-Process | Where-Object {$_.MainWindowTitle}
-      cleanup: |
-        # No cleanup needed for simulation
-      parsers:
-        plugins.stockpile.app.parsers.basic:
-          - source: host.process.id
-      requirements:
-        - privilege: user
-      detection:
-        - command_contains:
-            - get-process
-            - where-object
-            - MainWindowTitle 
+  description: Detects enumeration of application windows using PowerShell
+  tactic: discovery
+  technique:
+    attack_id: T1010
+    name: Application Window Discovery
+  platforms:
+    windows:
+      psh:
+        command: |
+          Get-Process | Where-Object {$_.MainWindowTitle}
+        cleanup: |
+          # No cleanup needed for simulation
+        parsers:
+          plugins.stockpile.app.parsers.basic:
+            - source: host.process.id
+        requirements:
+          - privilege: user
+  detection:
+    - command_contains:
+        - get-process
+        - where-object
+        - MainWindowTitle 
