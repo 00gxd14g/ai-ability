@@ -1,0 +1,28 @@
+id: DT0276
+name: Windows Firewall State Enumeration via Netsh
+description: Detects enumeration of Windows Firewall state using netsh command
+tactic: discovery
+technique:
+  attack_id: T1016
+  name: System Network Configuration Discovery
+platforms:
+  windows:
+    cmd:
+      command: |
+        netsh advfirewall show allprofiles
+      cleanup: |
+        # No cleanup needed for simulation
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: user
+      detection:
+        - process_name: netsh.exe
+        - command_contains:
+            - netsh
+            - firewall
+            - show
+            - state
+      exclusions:
+        - username: nessus 

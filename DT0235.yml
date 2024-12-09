@@ -1,0 +1,25 @@
+id: DT0235
+name: Enumeration to Encrypted Password File via Findstr
+description: Detects attempts to locate encrypted password files using findstr
+tactic: discovery
+technique:
+  attack_id: T1083
+  name: File and Directory Discovery
+platforms:
+  windows:
+    cmd:
+      command: |
+        findstr /S /M /C:"cpassword" *.xml
+      cleanup: |
+        # No cleanup needed for simulation
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: user
+      detection:
+        - process_name: findstr.exe
+        - command_contains:
+            - cpassword
+            - \sysvol\
+            - .xml 

@@ -1,0 +1,24 @@
+id: DT0310
+name: Mimikatz Potentially Used To Dump Credentials From LSASS
+description: Detects potential use of Mimikatz commands to dump credentials from LSASS memory
+tactic: credential-access
+technique:
+  attack_id: T1003.001
+  name: LSASS Memory
+platforms:
+  windows:
+    cmd:
+      command: |
+        echo "Simulating Mimikatz commands:"
+        echo "privilege::debug"
+        echo "sekurlsa::logonpasswords"
+        echo "kerberos::tgt"
+        echo "kerberos::ptt"
+        echo "kerberos::golden"
+      cleanup: |
+        # No cleanup needed for simulation
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: elevated 

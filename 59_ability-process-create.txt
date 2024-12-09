@@ -1,0 +1,288 @@
+"APPLY DT0310 - Mimikatz Potentially Use To Dump Credentials From LSASS on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains any of [privilege::debug or sekurlsa or kerberos::tgt or logonpasswords or kerberos::ptt or kerberos::golden]"
+"APPLY DT0331 - ARP Table Recon on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains all of [arp or -a]
+AND NOT when the event matches Username is any of nessus
+AND NOT when the event matches Process Name (custom) is any of CefSharp.BrowserSubprocess.exe"
+"APPLY DT0302 - Suspicious Certutil Command Usage Detected on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of certutil.exe
+AND when the event matches Command (custom) contains any of [decode or urlcache or decodehex or encode or exportPFX]"
+"APPLY DT0323 - Whoami Command Executed on Systems on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Event ID is any of 4688
+AND when the event matches Process Name (custom) contains any of whoami"
+"APPLY DT0264 - DNS Tunnel Detected via Muddywater Actor on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Parent Process Name (custom) is any of excel.exe
+AND when the event matches Command (custom) is any of Dataexchange.dll"
+"APPLY DT0265 - User Enumeration - Privileges Enumeration Detected With Whoami Command on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains any of whoami, Command (custom) contains any of [/groups or /priv]"
+"APPLY DT0277 - Windows - Firewall Config Enumeration via Netsh on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains all of [netsh or firewall or show or config]"
+"APPLY DT0275 - Network Share Enumeration via Net Command on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of [net.exe or net1.exe]
+AND when the event matches Command (custom) contains all of [net or share]"
+"APPLY DT0276 - Windows - Firewall State Enumeration via Netsh on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of netsh.exe
+AND when the event matches Command (custom) contains all of [netsh or firewall], Command (custom) contains any of [show or state]
+AND NOT when the event matches Username is any of nessus"
+"APPLY DT0273 - Network Enumeration - Possible ARP Table Recon Detected on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains all of [arp or -a]
+AND NOT when the event matches Username is any of [titus or nessus]
+AND NOT when the event matches Process_Name_ (custom) is any of CefSharp.BrowserSubprocess.exe
+AND NOT when the event matches Command (custom) matches any of expressions [C:\\Windows\\System32\\cmd\.exe \/c C:\\Windows\\System32\\arp\.exe -a &gt; C:\\Windows\\temp\\nessus_(\w+)\.txt or C:\\Windows\\System32\\cmd\.exe \/c ""C:\\Windows\\System32\\netstat\.exe -ano &gt; C:\\Windows\\TEMP\\nessus_(\w+)\.TMP &amp; ren C:\\Windows\\TEMP\\nessus_(\w+)\.TMP nessus_(\w+)\.TXT"" or C:\\WINDOWS\\System32\\cmd\.exe \/c ""C:\\WINDOWS\\System32\\netstat\.exe -ano &gt; C:\\WINDOWS\\TEMP\\nessus_(\w+)\.TMP &amp; ren C:\\WINDOWS\\TEMP\\nessus_(\w+)\.TMP nessus_(\w+)\.TXT"" or C:\\WINDOWS\\System32\\cmd\.exe \/c C:\\WINDOWS\\System32\\arp\.exe -a &gt; C:\\WINDOWS\\temp\\nessus_(\w+)\.txt]
+AND NOT when the event matches Process_Name_ (custom) is any of C:\Program Files\MicroStrategy\Workstation\CefSharp.BrowserSubprocess.exe"
+"APPLY DT0271 - Network Enumeration - Possible Network Recon via Route Command on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of ROUTE.exe
+AND when the event matches Command (custom) contains all of [route or print]"
+"APPLY DT0267 - User Enumeration - All User Groups Recon Detected With Whoami via Powershell on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of whoami.exe
+AND when the event matches Command (custom) contains any of /all"
+"APPLY DT0337 - Adfind - Enumerate Activate Directory User Objects on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains all of [adfind or -f], Command (custom) contains any of [objectcategory=person or objectcategory=user]"
+"APPLY DT0298 - Conhost.exe CommandLine Path Traversal on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of conhost.exe
+AND when the event matches Command (custom) contains any of /../../"
+"APPLY DT0303 - Suspicious Rundll32 Activity Invoking Sys File on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of Rundll32.exe
+AND when the event matches Command (custom) contains any of .sys"
+"APPLY DT0332 - Adfind - Enumarate Active Directory Admins on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains all of [adfind or -sc]"
+"APPLY DT0320 - qprocess Command Executed Possible Reconnaissance on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of qprocess.exe"
+"APPLY DT0241 - Possible RDP Session Hijacking via Tscon.exe on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of tscon.exe
+AND when the event matches Command (custom) contains any of [/dest or rdp-tcp]"
+"APPLY DT0229 - Password Spraying Attempts Using Dsacls on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains all of [dsacls or /user or /passwd]"
+"APPLY DT0235 - Enumeration Detected to Encrypted Password File via Findstr on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of findstr.exe
+AND when the event matches Command (custom) contains any of [cpassword or \sysvol\ or .xml]"
+"APPLY DT0266 - User Enumeration - Net User Usage Detected on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of [net.exe or net1.exe]
+AND when the event matches Command (custom) contains all of [net or user]"
+"APPLY DT0334 - Automated AD Recon on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains any of [ADRecon.ps1 or ADRecon]"
+"APPLY DT0301 - Svchost Spawning Office Application on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Parent Process Name (custom) is any of svchost.exe
+AND when the event matches Process Name (custom) is any of [winword.exe or excel.exe]"
+"APPLY DT0311 - Whoami Run As SYSTEM User Potential User Recon After Privilege Escalation on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of whoami.exe
+AND when the event matches Target Account Security ID (custom) contains any of NT AUTHORITY\SYSTEM
+AND when the event matches Username does not contain any of $"
+"APPLY DT0315 - Suspicious Csrss.exe Process Detected With Unusual Security ID and Parent Process on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Parent Process Name (custom) is any of smss.exe
+AND when the event matches Process Name (custom) is any of crss.exe
+AND when the event matches Target Account Security ID (custom) contains any of SYSTEM"
+"APPLY DT0317 - Systeminfo Command Executed Possible Reconnaissance on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains any of [systeminfo or systeminfo.exe]
+AND NOT when the source IP is one of the following 10.0.24.101"
+"APPLY DT0318 - Tasklist Command Executed Possible Reconnaissance on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when any of Process Name (custom), Command (custom) match tasklist"
+"APPLY DT0194 - LethalHTA Detection on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Parent Process Name (custom) contains any of svchost.exe
+AND when the event matches Process Name (custom) contains any of mshta.exe"
+"APPLY DT0319 - Netstat Command Executed Possible Network Reconnaissance on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) contains any of netstat
+AND NOT when the event matches Account Name (custom) is any of [nessus or SERVICEDESK$ or HDI_Sahip or hdi_sahip or Hdi_Sahip]
+AND NOT when the event matches WSEL Account Name (custom) is any of SERVICEDESK$"
+"APPLY DT0333 - System Network Connections Discovery on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains any of [netstat or ss -tulwn]
+AND NOT when any of Parent Process Name (custom) are contained in any of Refset: DT - System Network Connections Discovery  parent process Exclude - AlphaNumeric (Ignore Case)
+AND NOT when the event matches Command (custom) contains any of netstatÂ Â -a -n -o
+AND NOT when the event matches Account_Name (custom) is any of SERVICEDESK$
+AND NOT when the event matches Username is any of nessus"
+"APPLY DT0305 - Malicious Macro Detected on Word Document on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Parent Process Name (custom) is any of [excel.exe or winword.exe]
+AND when any of Process Name (custom) are contained in any of RefSet: Process Names List for DT0305 Rule - AlphaNumeric (Ignore Case)"
+"APPLY DT0290 - Password Cracking With Hashcat on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of hashcat.exe
+AND when the event matches Command (custom) contains any of hashcat, Command (custom) contains any of [-m or -a or 1000]"
+"APPLY DT0289 - File Get Hidden via Attrib.exe Process on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of attrib.exe
+AND when the event matches Command (custom) contains all of [attrib or +h]"
+"APPLY DT0288 - ProcDump Usage Detected Possible Process Dump Activity on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of procdump.exe"
+"APPLY DT0299 - Suspicious SSH Usage Possible RDP Tunneling on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of ssh.exe
+AND when the event matches Command (custom) contains all of [ssh or -L or 3389]"
+"APPLY DT0261 - Clearing Windows Logs with Wevtutil on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of wevtutil.exe
+AND when the event matches Command (custom) contains all of [wevtutil or cl]"
+"APPLY DT0300 - Suspicious SSH Port Forwarding on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of ssh.exe
+AND when the event matches Command (custom) contains any of [-R or -L or -D]"
+"APPLY DT0262 - Detecting Shadow Copy Deletion via Vssadmin on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of vssadmin.exe
+AND when the event matches Command (custom) contains all of [delete or shadows]"
+"APPLY DT0294 - WMIExec VBS Script Detected on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of cscript.exe
+AND when the event matches Command (custom) contains all of [.vbs or /shell]"
+"APPLY DT0269 - Administrator Account Enumeration Detected via Net Command on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of [net.exe or net1.exe]
+AND when the event matches Command (custom) contains all of [net or user or administrator]"
+"APPLY DT0335 - Account Discovery on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches ((""Command"" ilike '%net1%' AND ""Command"" ilike '%user%' ) OR ( ""Command"" ilike '%net%' AND ""Command"" ilike '%user%') OR (""Command"" ilike '%net1%' AND ""Command"" ilike '%group%') OR (""Command"" ilike '%net%' AND ""Command"" ilike '%group%') AND ""Parent Process Name""='net.exe' )) AQL filter query"
+"APPLY DT0293 - XORDump Usage Detected Possible Process Memory Dump on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of xordump.exe"
+"APPLY DT0270 - Administrator Group Enumeration Detected via Net Command on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of [net.exe or net1.exe]
+AND when the event matches Command (custom) contains all of [net or localgroup or administrators]"
+"APPLY DT0339 - Administrator Account Enumeration Detected via Net Command on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches ((""Command"" ilike '%net1%' AND ""Command"" ilike '%user%' ) OR ( ""Command"" ilike '%net%' AND ""Command"" ilike '%user%') OR (""Command"" ilike '%administrator%') AND ""Parent Process Name""='net.exe')) AQL filter query"
+"APPLY DT0292 - Nltest Command Executed For Domain Trust Discovery on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of nltest.exe
+AND when the event matches Command (custom) contains any of [/domain_trusts or /all_trusts]"
+"APPLY DT0268 - User Enumeration - SID Reconnaissance via WMIC on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of WMIC.exe
+AND when the event matches Command (custom) contains all of [wmic or useraccount]"
+"APPLY DT0291 - Lsass Dump Activity Detected via Outflank-Dumpert Tool on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) contains any of outflank-dumpert"
+"APPLY DT0278 - Firewall Disable via Netsh Command on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of netsh.exe
+AND when the event matches Command (custom) contains all of [netsh or set or opmode or disable]"
+"APPLY DT0279 - Firewall Disable via Advfirewall on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of netsh.exe
+AND when the event matches Command (custom) contains all of [netsh or advfirewall or set or state or off]"
+"APPLY DT0313 - Web Shell Detected With Suspicious Child Process on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Parent Process Name (custom) is any of [nginx.exe or apache.exe or w3wp.exe or tomcat.exe]
+AND when the event matches Process Name (custom) is any of [cmd.exe or powershell.exe]"
+"APPLY DT0287 - Zenmap Tool Executed On Systems on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of zenmap.exe"
+"APPLY DT0338 - Application Window Discovery on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains all of [get-process or where-object or MainWindowsTitle]"
+"APPLY DT0297 - CleanWipe Usage Detected on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of [CATClean.exe or CleanWipe.exe]"
+"APPLY DT0285 - CertUtil With Decode Argument on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of certutil.exe
+AND when the event matches Command (custom) contains all of [certutil or -decode]"
+"APPLY DT0286 - Detecting Tampering of Windows Defender Command Prompt on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of sc.exe
+AND when the event matches Command (custom) contains all of [config or stop or query]"
+"APPLY DT0284 - Certutil exe certificate extraction on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Command (custom) contains any of [certutil or -exportpfx]"
+"APPLY DT0283 - CertUtil Download With VerifyCtl and Split Arguments on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of certutil.exe
+AND when the event matches Command (custom) contains all of [certutil or -f or split or VerifyCtl]"
+"APPLY DT0282 - CertUtil Download With URLCache and Split Arguments on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of certutil.exe
+AND when the event matches Command (custom) contains all of [certutil or /f or split or urlcache]"
+"APPLY DT0280 - Cleartext Password Search Detected via Findstr on events which are detected by the LOCAL system
+AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log
+AND when the event category for the event is one of the following System.Process Creation Success
+AND when the event matches Process Name (custom) is any of findstr.exe
+AND when the event matches Command (custom) contains any of [/b or /e or /l or /r or /s or /i or /x or /v or /m or /o or /p or /f or /c or /g or /d or /a or /n], Command (custom) contains any of [secret or pas or pswd or password]"

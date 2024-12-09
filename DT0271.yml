@@ -1,0 +1,24 @@
+id: DT0271
+name: Network Reconnaissance via Route Command
+description: Detects network route enumeration using route print command
+tactic: discovery
+technique:
+  attack_id: T1016
+  name: System Network Configuration Discovery
+platforms:
+  windows:
+    cmd:
+      command: |
+        route print
+      cleanup: |
+        # No cleanup needed for simulation
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: user
+      detection:
+        - process_name: ROUTE.exe
+        - command_contains:
+            - route
+            - print 

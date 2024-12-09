@@ -1,0 +1,23 @@
+id: DT0332
+name: Adfind - Enumerate Active Directory Admins
+description: Detects enumeration of Active Directory administrators using adfind tool
+tactic: discovery
+technique:
+  attack_id: T1087.002
+  name: Domain Account Discovery
+platforms:
+  windows:
+    cmd:
+      command: |
+        adfind -sc admins
+      cleanup: |
+        # No cleanup needed for simulation
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: user
+      detection:
+        - command_contains:
+            - adfind
+            - -sc 

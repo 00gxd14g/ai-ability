@@ -1,0 +1,26 @@
+id: DT0278
+name: Firewall Disable via Netsh Command
+description: Detects attempts to disable Windows Firewall using netsh command
+tactic: defense-evasion
+technique:
+  attack_id: T1562.004
+  name: Disable or Modify System Firewall
+platforms:
+  windows:
+    cmd:
+      command: |
+        netsh firewall set opmode disable
+      cleanup: |
+        netsh firewall set opmode enable
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: elevated
+      detection:
+        - process_name: netsh.exe
+        - command_contains:
+            - netsh
+            - set
+            - opmode
+            - disable 

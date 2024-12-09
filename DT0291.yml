@@ -1,0 +1,22 @@
+id: DT0291
+name: LSASS Dump Activity via Outflank-Dumpert Tool
+description: Detects attempts to dump LSASS memory using Outflank-Dumpert tool
+tactic: credential-access
+technique:
+  attack_id: T1003.001
+  name: LSASS Memory
+platforms:
+  windows:
+    cmd:
+      command: |
+        type NUL > dumpert.exe
+        dumpert.exe
+      cleanup: |
+        del dumpert.exe 2>nul
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: elevated
+      detection:
+        - process_name: dumpert.exe

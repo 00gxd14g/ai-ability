@@ -1,0 +1,22 @@
+id: DT0331
+name: ARP Table Reconnaissance
+description: Simulates ARP table reconnaissance activity using arp -a command
+tactic: discovery
+technique:
+  attack_id: T1016
+  name: System Network Configuration Discovery
+platforms:
+  windows:
+    cmd:
+      command: |
+        arp -a
+      cleanup: |
+        # No cleanup needed for simulation
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: user
+      exclusions:
+        - username: nessus
+        - process: CefSharp.BrowserSubprocess.exe 

@@ -1,0 +1,26 @@
+id: DT0275
+name: Network Share Enumeration via Net Command
+description: Detects enumeration of network shares using net share command
+tactic: discovery
+technique:
+  attack_id: T1135
+  name: Network Share Discovery
+platforms:
+  windows:
+    cmd:
+      command: |
+        net share
+      cleanup: |
+        # No cleanup needed for simulation
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: user
+      detection:
+        - process_name:
+            - net.exe
+            - net1.exe
+        - command_contains:
+            - net
+            - share 

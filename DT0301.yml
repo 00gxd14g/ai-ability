@@ -1,0 +1,25 @@
+id: DT0301
+name: Svchost Spawning Office Application
+description: Detects suspicious Office application processes spawned by svchost.exe
+tactic: execution
+technique:
+  attack_id: T1218
+  name: Signed Binary Proxy Execution
+platforms:
+  windows:
+    cmd:
+      command: |
+        # This is a detection-only ability, no actual command execution
+        echo "Monitoring for svchost.exe spawning Office applications"
+      cleanup: |
+        # No cleanup needed for simulation
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: user
+      detection:
+        - parent_process: svchost.exe
+        - process_name:
+            - winword.exe
+            - excel.exe 

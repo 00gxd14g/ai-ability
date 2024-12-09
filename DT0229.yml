@@ -1,0 +1,25 @@
+id: DT0229
+name: Password Spraying Attempts Using Dsacls
+description: Detects potential password spraying attempts using dsacls utility
+tactic: credential-access
+technique:
+  attack_id: T1110.003
+  name: Password Spraying
+platforms:
+  windows:
+    cmd:
+      command: |
+        type NUL > dsacls.exe
+        dsacls.exe /user username /passwd password
+      cleanup: |
+        del dsacls.exe 2>nul
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+          - source: host.process.id
+      requirements:
+        - privilege: user
+      detection:
+        - command_contains:
+            - dsacls
+            - /user
+            - /passwd 
