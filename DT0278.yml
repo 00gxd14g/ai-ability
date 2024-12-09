@@ -9,10 +9,8 @@
   platforms:
     windows:
       cmd:
-        command: |
-          netsh firewall set opmode disable
-        cleanup: |
-          netsh firewall set opmode enable
+        command: "netsh firewall set opmode disable"
+        cleanup: "netsh firewall set opmode enable"
         parsers:
           plugins.stockpile.app.parsers.basic:
             - source: host.process.id

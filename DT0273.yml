@@ -9,10 +9,8 @@
   platforms:
     windows:
       cmd:
-        command: |
-          arp -a
-        cleanup: |
-          # No cleanup needed for simulation
+        command: "arp -a"
+        cleanup: ""
         parsers:
           plugins.stockpile.app.parsers.basic:
             - source: host.process.id

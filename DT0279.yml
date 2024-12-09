@@ -9,10 +9,8 @@
   platforms:
     windows:
       cmd:
-        command: |
-          netsh advfirewall set allprofiles state off
-        cleanup: |
-          netsh advfirewall set allprofiles state on
+        command: "netsh advfirewall set allprofiles state off"
+        cleanup: "netsh advfirewall set allprofiles state on"
         parsers:
           plugins.stockpile.app.parsers.basic:
             - source: host.process.id

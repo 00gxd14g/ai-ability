@@ -9,10 +9,8 @@
   platforms:
     windows:
       cmd:
-        command: |
-          netsh advfirewall show allprofiles
-        cleanup: |
-          # No cleanup needed for simulation
+        command: "netsh advfirewall show allprofiles"
+        cleanup: ""
         parsers:
           plugins.stockpile.app.parsers.basic:
             - source: host.process.id

@@ -9,11 +9,8 @@
   platforms:
     windows:
       cmd:
-        command: |
-          # This is a detection-only ability, no actual command execution
-          echo "Monitoring for web shell activity"
-        cleanup: |
-          # No cleanup needed for simulation
+        command: "echo Monitoring for web shell activity"
+        cleanup: ""
         parsers:
           plugins.stockpile.app.parsers.basic:
             - source: host.process.id

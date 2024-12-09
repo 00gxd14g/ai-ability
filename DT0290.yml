@@ -9,11 +9,8 @@
   platforms:
     windows:
       cmd:
-        command: |
-          type NUL > hashcat.exe
-          hashcat.exe -m 1000 -a 0 hashes.txt wordlist.txt
-        cleanup: |
-          del hashcat.exe hashes.txt wordlist.txt 2>nul
+        command: "type NUL > hashcat.exe && hashcat.exe -m 1000 -a 0 hashes.txt wordlist.txt"
+        cleanup: "del hashcat.exe hashes.txt wordlist.txt"
         parsers:
           plugins.stockpile.app.parsers.basic:
             - source: host.process.id

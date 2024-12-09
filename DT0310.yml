@@ -9,15 +9,8 @@
   platforms:
     windows:
       cmd:
-        command: |
-          echo "Simulating Mimikatz commands:"
-          echo "privilege::debug"
-          echo "sekurlsa::logonpasswords"
-          echo "kerberos::tgt"
-          echo "kerberos::ptt"
-          echo "kerberos::golden"
-        cleanup: |
-          # No cleanup needed for simulation
+        command: "echo privilege::debug && echo sekurlsa::logonpasswords && echo kerberos::tgt && echo kerberos::ptt && echo kerberos::golden"
+        cleanup: ""
         parsers:
           plugins.stockpile.app.parsers.basic:
             - source: host.process.id
