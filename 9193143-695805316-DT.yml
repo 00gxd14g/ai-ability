@@ -1,0 +1,21 @@
+id: 9193143-695805316-DT
+name: DT026s5 - User Enumeration - Privileges Enumeration with Whoami
+description: Detects user privilege enumeration using whoami command with privilege options
+tactic: discovery
+technique:
+  attack_id: T1033
+  name: System Owner/User Discovery
+platforms:
+  windows:
+    cmd:
+      command: whoami /groups && whoami /priv
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- command_contains:
+  - /groups
+  - /priv

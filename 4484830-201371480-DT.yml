@@ -1,0 +1,20 @@
+id: 4484830-201371480-DT
+name: DT0264 - DNS Tunnel Detection via MuddyWater Actor
+description: Detects DNS tunneling activities associated with MuddyWater threat actor
+tactic: command-and-control
+technique:
+  attack_id: T1572
+  name: Protocol Tunneling
+platforms:
+  windows:
+    cmd:
+      command: rundll32.exe dataexchange.dll,ExportData
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- parent_process: excel.exe
+- command_contains: Dataexchange.dll

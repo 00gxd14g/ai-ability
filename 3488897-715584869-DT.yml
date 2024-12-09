@@ -1,0 +1,23 @@
+id: 3488897-715584869-DT
+name: DT0337 - Adfind - Enumerate Active Directory User Objects
+description: Detects enumeration of Active Directory user objects using adfind tool
+tactic: discovery
+technique:
+  attack_id: T1087.002
+  name: Domain Account Discovery
+platforms:
+  windows:
+    cmd:
+      command: adfind -f objectcategory=person && adfind -f objectcategory=user
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- command_contains:
+  - adfind
+  - -f
+  - objectcategory=person
+  - objectcategory=user

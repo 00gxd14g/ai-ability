@@ -1,0 +1,21 @@
+id: 1430645-577232997-DT
+name: DT0267 - User Enumeration - All User Groups Recon via Whoami
+description: Detects enumeration of all user groups using whoami /all command
+tactic: discovery
+technique:
+  attack_id: T1033
+  name: System Owner/User Discovery
+platforms:
+  windows:
+    cmd:
+      command: whoami /all
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- command_contains:
+  - whoami
+  - /all

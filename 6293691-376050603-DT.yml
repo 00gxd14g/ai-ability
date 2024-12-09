@@ -1,0 +1,20 @@
+id: 6293691-376050603-DT
+name: DT0318 - Tasklist Command Execution - Possible Reconnaissance
+description: Detects execution of tasklist command for process enumeration
+tactic: discovery
+technique:
+  attack_id: T1057
+  name: Process Discovery
+platforms:
+  windows:
+    cmd:
+      command: tasklist
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- command_contains: tasklist
+- process_name: tasklist

@@ -1,0 +1,25 @@
+id: 1927974-759245377-DT
+name: DT0269 - Administrator Account Enumeration via Net Command
+description: Detects enumeration of administrator accounts using net command
+tactic: discovery
+technique:
+  attack_id: T1087.001
+  name: Local Account Discovery
+platforms:
+  windows:
+    cmd:
+      command: net user administrator
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- process_name:
+  - net.exe
+  - net1.exe
+- command_contains:
+  - net
+  - user
+  - administrator

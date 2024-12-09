@@ -1,0 +1,21 @@
+id: 1959132-315116904-DT
+name: DT0288 - ProcDump Usage Detection - Process Dump Activity
+description: Detects use of ProcDump for process memory dumping
+tactic: credential-access
+technique:
+  attack_id: T1003
+  name: OS Credential Dumping
+platforms:
+  windows:
+    cmd:
+      command: 'type NUL > procdump.exe
+
+        procdump.exe -ma lsass.exe lsass.dmp'
+      cleanup: del procdump.exe lsass.dmp 2>nul
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: elevated
+detection:
+- process_name: procdump.exe

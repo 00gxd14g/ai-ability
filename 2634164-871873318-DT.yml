@@ -1,0 +1,20 @@
+id: 2634164-871873318-DT
+name: DT0194 - LethalHTA Detection
+description: Detects potential LethalHTA attack using MSHTA
+tactic: execution
+technique:
+  attack_id: T1218.005
+  name: Mshta
+platforms:
+  windows:
+    cmd:
+      command: echo Monitoring for LethalHTA activity
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- parent_process: svchost.exe
+- process_name: mshta.exe

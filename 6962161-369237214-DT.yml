@@ -1,0 +1,21 @@
+id: 6962161-369237214-DT
+name: DT0284 - Certutil Certificate Extraction
+description: Detects attempts to extract certificates using certutil.exe
+tactic: collection
+technique:
+  attack_id: T1025
+  name: Data from Removable Media
+platforms:
+  windows:
+    cmd:
+      command: certutil -exportpfx cert.pfx
+      cleanup: del cert.pfx 2>nul
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- command_contains:
+  - certutil
+  - -exportpfx

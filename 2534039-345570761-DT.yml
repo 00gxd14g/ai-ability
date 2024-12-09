@@ -1,0 +1,22 @@
+id: 2534039-345570761-DT
+name: DT0262 - Shadow Copy Deletion via Vssadmin
+description: Detects attempts to delete Volume Shadow Copies using vssadmin
+tactic: impact
+technique:
+  attack_id: T1490
+  name: Inhibit System Recovery
+platforms:
+  windows:
+    cmd:
+      command: vssadmin.exe delete shadows /all
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: elevated
+detection:
+- process_name: vssadmin.exe
+- command_contains:
+  - delete
+  - shadows

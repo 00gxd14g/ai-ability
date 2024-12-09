@@ -1,0 +1,26 @@
+id: 2565992-973655863-DT
+name: DT0289 - File Hidden via Attrib.exe Process
+description: Detects attempts to hide files using attrib.exe
+tactic: defense-evasion
+technique:
+  attack_id: T1564.001
+  name: Hidden Files and Directories
+platforms:
+  windows:
+    cmd:
+      command: 'echo Test file content > test.txt
+
+        attrib +h test.txt'
+      cleanup: 'attrib -h test.txt 2>nul
+
+        del test.txt 2>nul'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- process_name: attrib.exe
+- command_contains:
+  - attrib
+  - +h

@@ -1,0 +1,24 @@
+id: 9514543-844385050-DT
+name: DT0266 - User Enumeration - Net User Usage Detection
+description: Detects enumeration of users using net user command
+tactic: discovery
+technique:
+  attack_id: T1087.001
+  name: Local Account Discovery
+platforms:
+  windows:
+    cmd:
+      command: net user
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- process_name:
+  - net.exe
+  - net1.exe
+- command_contains:
+  - net
+  - user
