@@ -1,5 +1,4 @@
----
-- id: DT0305
+id: DT0305
   name: Malicious Macro Detection in Word Document
   description: Detects potential malicious macro execution from Office documents
   tactic: execution

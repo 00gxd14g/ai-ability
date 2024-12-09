@@ -1,28 +1,25 @@
----
-- id: DT0270
-  name: Administrator Group Enumeration via Net Command
-  description: Detects enumeration of administrator groups using net localgroup command
-  tactic: discovery
-  technique:
-    attack_id: T1087.001
-    name: Local Account Discovery
-  platforms:
-    windows:
-      cmd:
-        command: |
-          net localgroup administrators
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - process_name:
-        - net.exe
-        - net1.exe
-    - command_contains:
-        - net
-        - localgroup
-        - administrators 
+id: DT0270
+name: DT0270 - Administrator Group Enumeration via Net Command
+description: Detects enumeration of administrator groups using net localgroup command
+tactic: discovery
+technique:
+  attack_id: T1087.001
+  name: Local Account Discovery
+platforms:
+  windows:
+    cmd:
+      command: net localgroup administrators
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- process_name:
+  - net.exe
+  - net1.exe
+- command_contains:
+  - net
+  - localgroup
+  - administrators

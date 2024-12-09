@@ -1,23 +1,20 @@
----
-- id: DT0298
-  name: Conhost.exe CommandLine Path Traversal
-  description: Detects suspicious path traversal attempts using conhost.exe
-  tactic: defense-evasion
-  technique:
-    attack_id: T1059
-    name: Command and Scripting Interpreter
-  platforms:
-    windows:
-      cmd:
-        command: |
-          conhost.exe /../../
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - process_name: conhost.exe
-    - command_contains: /../../ 
+id: DT0298
+name: DT0298 - Conhost.exe CommandLine Path Traversal
+description: Detects suspicious path traversal attempts using conhost.exe
+tactic: defense-evasion
+technique:
+  attack_id: T1059
+  name: Command and Scripting Interpreter
+platforms:
+  windows:
+    cmd:
+      command: conhost.exe /../../
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- process_name: conhost.exe
+- command_contains: /../../

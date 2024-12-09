@@ -1,26 +1,24 @@
----
-- id: DT0294
-  name: WMIExec VBS Script Detection
-  description: Detects execution of WMIExec VBS scripts for lateral movement
-  tactic: execution
-  technique:
-    attack_id: T1047
-    name: Windows Management Instrumentation
-  platforms:
-    windows:
-      cmd:
-        command: |
-          # Simulating WMIExec script execution
-          cscript.exe script.vbs /shell
-        cleanup: |
-          del script.vbs 2>nul
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - process_name: cscript.exe
-    - command_contains:
-        - .vbs
-        - /shell 
+id: DT0294
+name: DT0294 - WMIExec VBS Script Detection
+description: Detects execution of WMIExec VBS scripts for lateral movement
+tactic: execution
+technique:
+  attack_id: T1047
+  name: Windows Management Instrumentation
+platforms:
+  windows:
+    cmd:
+      command: '# Simulating WMIExec script execution
+
+        cscript.exe script.vbs /shell'
+      cleanup: del script.vbs 2>nul
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- process_name: cscript.exe
+- command_contains:
+  - .vbs
+  - /shell

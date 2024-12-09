@@ -1,22 +1,19 @@
----
-- id: DT0320
-  name: Qprocess Command Execution - Possible Reconnaissance
-  description: Detects execution of qprocess.exe for process enumeration
-  tactic: discovery
-  technique:
-    attack_id: T1057
-    name: Process Discovery
-  platforms:
-    windows:
-      cmd:
-        command: |
-          qprocess.exe
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - process_name: qprocess.exe 
+id: DT0320
+name: DT0320 - Qprocess Command Execution - Possible Reconnaissance
+description: Detects execution of qprocess.exe for process enumeration
+tactic: discovery
+technique:
+  attack_id: T1057
+  name: Process Discovery
+platforms:
+  windows:
+    cmd:
+      command: qprocess.exe
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- process_name: qprocess.exe

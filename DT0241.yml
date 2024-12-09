@@ -1,25 +1,22 @@
----
-- id: DT0241
-  name: Possible RDP Session Hijacking via Tscon.exe
-  description: Detects potential RDP session hijacking attempts using tscon.exe
-  tactic: lateral-movement
-  technique:
-    attack_id: T1563.002
-    name: RDP Hijacking
-  platforms:
-    windows:
-      cmd:
-        command: |
-          tscon.exe 1 /dest:rdp-tcp#1
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: elevated
-  detection:
-    - process_name: tscon.exe
-    - command_contains:
-        - /dest
-        - rdp-tcp
+id: DT0241
+name: DT0241 - Possible RDP Session Hijacking via Tscon.exe
+description: Detects potential RDP session hijacking attempts using tscon.exe
+tactic: lateral-movement
+technique:
+  attack_id: T1563.002
+  name: RDP Hijacking
+platforms:
+  windows:
+    cmd:
+      command: tscon.exe 1 /dest:rdp-tcp#1
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: elevated
+detection:
+- process_name: tscon.exe
+- command_contains:
+  - /dest
+  - rdp-tcp

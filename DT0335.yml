@@ -1,30 +1,30 @@
----
-- id: DT0335
+id: DT0335
+name: DT0335 - Account Discovery
+description: Detects account discovery attempts using net commands
+tactic: discovery
+technique:
+  attack_id: T1087
   name: Account Discovery
-  description: Detects account discovery attempts using net commands
-  tactic: discovery
-  technique:
-    attack_id: T1087
-    name: Account Discovery
-  platforms:
-    windows:
-      cmd:
-        command: |
-          net user
-          net group
-          net1 user
-          net1 group
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - command_contains:
-        - net1 user
-        - net user
-        - net1 group
-        - net group
-    - parent_process: net.exe 
+platforms:
+  windows:
+    cmd:
+      command: 'net user
+
+        net group
+
+        net1 user
+
+        net1 group'
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- command_contains:
+  - net1 user
+  - net user
+  - net1 group
+  - net group
+- parent_process: net.exe

@@ -1,25 +1,23 @@
----
-- id: DT0297
-  name: CleanWipe Usage Detection
-  description: Detects execution of CleanWipe utility
-  tactic: defense-evasion
-  technique:
-    attack_id: T1070
-    name: Indicator Removal on Host
-  platforms:
-    windows:
-      cmd:
-        command: |
-          # This is a detection-only ability, no actual command execution
-          echo "Monitoring for CleanWipe usage"
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: elevated
-  detection:
-    - process_name:
-        - CATClean.exe
-        - CleanWipe.exe 
+id: DT0297
+name: DT0297 - CleanWipe Usage Detection
+description: Detects execution of CleanWipe utility
+tactic: defense-evasion
+technique:
+  attack_id: T1070
+  name: Indicator Removal on Host
+platforms:
+  windows:
+    cmd:
+      command: '# This is a detection-only ability, no actual command execution
+
+        echo Monitoring for CleanWipe usage'
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: elevated
+detection:
+- process_name:
+  - CATClean.exe
+  - CleanWipe.exe

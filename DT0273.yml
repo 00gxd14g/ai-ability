@@ -1,30 +1,29 @@
----
-- id: DT0273
-  name: Network Enumeration - ARP Table Reconnaissance
-  description: Detects ARP table enumeration while excluding known benign processes
-  tactic: discovery
-  technique:
-    attack_id: T1016
-    name: System Network Configuration Discovery
-  platforms:
-    windows:
-      cmd:
-        command: "arp -a"
-        cleanup: ""
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - command_contains:
-        - arp
-        - -a
-    - exclusions:
-        - username:
-            - titus
-            - nessus
-        - process: CefSharp.BrowserSubprocess.exe
-        - command_regex:
-            - "C:\\Windows\\System32\\cmd\\.exe /c C:\\Windows\\System32\\arp\\.exe -a > C:\\Windows\\temp\\nessus_\\w+\\.txt"
-            - "C:\\Windows\\System32\\cmd\\.exe /c \"C:\\Windows\\System32\\netstat\\.exe -ano > C:\\Windows\\TEMP\\nessus_\\w+\\.TMP & ren C:\\Windows\\TEMP\\nessus_\\w+\\.TMP nessus_\\w+\\.TXT\"" 
+id: DT0273
+name: DT0273 - Network Enumeration - ARP Table Reconnaissance
+description: Detects ARP table enumeration while excluding known benign processes
+tactic: discovery
+technique:
+  attack_id: T1016
+  name: System Network Configuration Discovery
+platforms:
+  windows:
+    cmd:
+      command: arp -a
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- command_contains:
+  - arp
+  - -a
+- exclusions:
+  - username:
+    - titus
+    - nessus
+  - process: CefSharp.BrowserSubprocess.exe
+  - command_regex:
+    - C:\Windows\System32\cmd\.exe /c C:\Windows\System32\arp\.exe -a > C:\Windows\temp\nessus_\w+\.txt
+    - C:\Windows\System32\cmd\.exe /c "C:\Windows\System32\netstat\.exe -ano > C:\Windows\TEMP\nessus_\w+\.TMP & ren C:\Windows\TEMP\nessus_\w+\.TMP nessus_\w+\.TXT"

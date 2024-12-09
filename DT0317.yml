@@ -1,26 +1,23 @@
----
-- id: DT0317
-  name: Systeminfo Command Execution - Possible Reconnaissance
-  description: Detects execution of systeminfo command for system reconnaissance
-  tactic: discovery
-  technique:
-    attack_id: T1082
-    name: System Information Discovery
-  platforms:
-    windows:
-      cmd:
-        command: |
-          systeminfo
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - command_contains:
-        - systeminfo
-        - systeminfo.exe
-  exclusions:
-    - source_ip: 10.0.24.101 
+id: DT0317
+name: DT0317 - Systeminfo Command Execution - Possible Reconnaissance
+description: Detects execution of systeminfo command for system reconnaissance
+tactic: discovery
+technique:
+  attack_id: T1082
+  name: System Information Discovery
+platforms:
+  windows:
+    cmd:
+      command: systeminfo
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- command_contains:
+  - systeminfo
+  - systeminfo.exe
+exclusions:
+- source_ip: 10.0.24.101

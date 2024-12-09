@@ -1,24 +1,20 @@
----
-- id: DT0194
-  name: LethalHTA Detection
-  description: Detects potential LethalHTA attack using MSHTA
-  tactic: execution
-  technique:
-    attack_id: T1218.005
-    name: Mshta
-  platforms:
-    windows:
-      cmd:
-        command: |
-          # This is a detection-only ability, no actual command execution
-          echo "Monitoring for LethalHTA activity"
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - parent_process: svchost.exe
-    - process_name: mshta.exe 
+id: DT0194
+name: DT0194 - LethalHTA Detection
+description: Detects potential LethalHTA attack using MSHTA
+tactic: execution
+technique:
+  attack_id: T1218.005
+  name: Mshta
+platforms:
+  windows:
+    cmd:
+      command: echo Monitoring for LethalHTA activity
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- parent_process: svchost.exe
+- process_name: mshta.exe

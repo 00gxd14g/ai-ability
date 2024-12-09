@@ -1,27 +1,26 @@
----
-- id: DT0280
-  name: Cleartext Password Search via Findstr
-  description: Detects attempts to search for cleartext passwords using findstr
-  tactic: credential-access
-  technique:
-    attack_id: T1552.003
-    name: Credentials in Files
-  platforms:
-    windows:
-      cmd:
-        command: "findstr /i /s \"password\" *.txt *.ini *.config"
-        cleanup: ""
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - process_name: findstr.exe
-    - command_contains:
-        - /i
-        - /s
-        - password
-        - secret
-        - pas
-        - pswd 
+id: DT0280
+name: DT0280 - Cleartext Password Search via Findstr
+description: Detects attempts to search for cleartext passwords using findstr
+tactic: credential-access
+technique:
+  attack_id: T1552.003
+  name: Credentials in Files
+platforms:
+  windows:
+    cmd:
+      command: findstr /i /s password *.txt *.ini *.config
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- process_name: findstr.exe
+- command_contains:
+  - /i
+  - /s
+  - password
+  - secret
+  - pas
+  - pswd

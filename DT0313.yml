@@ -1,27 +1,26 @@
----
-- id: DT0313
-  name: Web Shell Detection With Suspicious Child Process
-  description: Detects potential web shell activity by monitoring web server processes spawning suspicious child processes
-  tactic: persistence
-  technique:
-    attack_id: T1505.003
-    name: Web Shell
-  platforms:
-    windows:
-      cmd:
-        command: "echo Monitoring for web shell activity"
-        cleanup: ""
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: user
-  detection:
-    - parent_process:
-        - nginx.exe
-        - apache.exe
-        - w3wp.exe
-        - tomcat.exe
-    - process_name:
-        - cmd.exe
-        - powershell.exe 
+id: DT0313
+name: DT0313 - Web Shell Detection With Suspicious Child Process
+description: Detects potential web shell activity by monitoring web server processes spawning suspicious child processes
+tactic: persistence
+technique:
+  attack_id: T1505.003
+  name: Web Shell
+platforms:
+  windows:
+    cmd:
+      command: echo Monitoring for web shell activity
+      cleanup: ''
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: user
+detection:
+- parent_process:
+  - nginx.exe
+  - apache.exe
+  - w3wp.exe
+  - tomcat.exe
+- process_name:
+  - cmd.exe
+  - powershell.exe

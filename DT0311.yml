@@ -1,24 +1,21 @@
----
-- id: DT0311
-  name: Whoami Run As SYSTEM User
-  description: Detects whoami execution with SYSTEM privileges, potential post-privilege escalation reconnaissance
-  tactic: discovery
-  technique:
-    attack_id: T1033
-    name: System Owner/User Discovery
-  platforms:
-    windows:
-      cmd:
-        command: |
-          whoami
-        cleanup: |
-          # No cleanup needed for simulation
-        parsers:
-          plugins.stockpile.app.parsers.basic:
-            - source: host.process.id
-        requirements:
-          - privilege: elevated
-  detection:
-    - process_name: whoami.exe
-    - security_id: NT AUTHORITY\SYSTEM
-    - username_not_contains: $ 
+id: DT0311
+name: DT0311 - Whoami Run As SYSTEM User
+description: Detects whoami execution with SYSTEM privileges, potential post-privilege escalation reconnaissance
+tactic: discovery
+technique:
+  attack_id: T1033
+  name: System Owner/User Discovery
+platforms:
+  windows:
+    cmd:
+      command: whoami
+      cleanup: '# No cleanup needed for simulation'
+      parsers:
+        plugins.stockpile.app.parsers.basic:
+        - source: host.process.id
+      requirements:
+      - privilege: elevated
+detection:
+- process_name: whoami.exe
+- security_id: NT AUTHORITY\SYSTEM
+- username_not_contains: $
